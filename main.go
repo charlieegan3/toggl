@@ -90,7 +90,7 @@ func main() {
 		}
 
 		standupText := fmt.Sprintf(
-			"%s\n%s\n%s\n-",
+			"```\n%s\n%s\n%s\n-\n```",
 			day.Format("Monday"),
 			entries,
 			nextDay.Format("Monday"),
