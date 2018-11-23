@@ -82,6 +82,9 @@ func main() {
 
 		// compute the next day for the second half of the standup
 		nextDay := day.AddDate(0, 0, 1)
+		if nextDay.Format("Monday") == "Saturday" {
+			nextDay = day.AddDate(0, 0, 3)
+		}
 
 		// fetch the entries
 		entries, err := getEntries(date)
