@@ -93,12 +93,13 @@ func main() {
 		}
 
 		standupText := fmt.Sprintf(
-			"```\n%s\n%s\n%s\n-\n```",
+			"<html><body><textarea cols=\"100\" rows=\"50\">```\n%s:\n%s\n%s:\n-\n```</textarea></body></html>",
 			day.Format("Monday"),
 			entries,
 			nextDay.Format("Monday"),
 		)
 
+		w.Header().Set("Content-Type", "text/html")
 		fmt.Fprintf(w, standupText)
 	})
 
