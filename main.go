@@ -40,17 +40,22 @@ func getEntries(day string) (string, error) {
 		return "", fmt.Errorf("Failed to parse json body: %v", err)
 	}
 
-	entriesForDate := make(map[string]int64)
+	entryDurations := make(map[string]int64)
+	orderedEntries := []string{}
 	for _, v := range entries {
 		if strings.Contains(v.Start, day) {
-			entriesForDate[v.Description] += v.Duration
+			if entryDurations[v.Description] == 0 {
+				orderedEntries = append(orderedEntries, v.Description)
+			}
+			entryDurations[v.Description] += v.Duration
 		}
 	}
 
 	var text string
-	for k, v := range entriesForDate {
-		if v > 0 {
-			text += fmt.Sprintf("- [%.2f] %s\n", float64(v)/60.0/60.0, k)
+	for _, description := range orderedEntries {
+		value := entryDurations[description]
+		if value > 0 {
+			text += fmt.Sprintf("- [%.2f] %s\n", float64(value)/60.0/60.0, description)
 		}
 	}
 
