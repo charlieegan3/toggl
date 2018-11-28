@@ -43,7 +43,7 @@ func getEntries(day string) (string, error) {
 	entryDurations := make(map[string]int64)
 	orderedEntries := []string{}
 	for _, v := range entries {
-		if strings.Contains(v.Start, day) {
+		if strings.Contains(v.Start, day) && v.Duration > 1 {
 			if entryDurations[v.Description] == 0 {
 				orderedEntries = append(orderedEntries, v.Description)
 			}
