@@ -17,11 +17,16 @@ type entry struct {
 }
 
 func getEntries(day string) (string, error) {
+	token, err := ioutil.ReadFile(os.Getenv("TOKEN_PATH"))
+	if err != nil {
+		return "", fmt.Errorf("failed to read token %v", err)
+	}
+
 	req, err := http.NewRequest("GET", "https://www.toggl.com/api/v8/time_entries", nil)
 	if err != nil {
 		return "", fmt.Errorf("Failed to create request: %v", err)
 	}
-	req.SetBasicAuth(os.ExpandEnv("$TOKEN"), "api_token")
+	req.SetBasicAuth(strings.TrimSpace(string(token)), "api_token")
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
