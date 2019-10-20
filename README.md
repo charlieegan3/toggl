@@ -1,4 +1,4 @@
-Deprecated project [Clockify integration](https://github.com/charlieegan3/clockify-standup)
+Deprecated project, replaced by [clockify-standup](https://github.com/charlieegan3/clockify-standup)
 
 # toggl standup
 
